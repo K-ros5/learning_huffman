@@ -11,16 +11,18 @@ Currently uses a VERY dumb implementation for the file header output, using byte
 
 ## Usage
 ```
-Usage: learning_huffman [OPTIONS]
+Usage: learning_huffman [OPTIONS] [FILE]
+
+Arguments:
+  [FILE]  output file
 
 Options:
-  -c, --compress <COMPRESS>        compress file
-  -o, --output <OUTPUT>            output file
-  -f, --frequencies <FREQUENCIES>  frequency of each byte of file
-  -h, --help                       Print help
-  -V, --version                    Print version
+  -c, --compress <FILE>     compress file
+  -d, --decompress <FILE>   compress file
+  -f, --frequencies <FILE>  print frequency of each byte in file
+  -h, --help                Print help
+  -V, --version             Print version
 ```
 
 ## Todo
 * Implement better header output type, not using frequencies
-* Decompression

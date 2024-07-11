@@ -29,13 +29,13 @@ impl Ord for HuffNode {
 }
 
 impl HuffNode {
-    pub fn from_frequencies(frequencies: [usize; 256]) -> Option<Box<Self>> {
+    pub fn from_frequencies(frequencies: &[usize; 256]) -> Option<Box<Self>> {
         let mut heap = BinaryHeap::new();
 
-        for (i, frequency) in frequencies.into_iter().enumerate() {
-            if frequency != 0 {
+        for (i, frequency) in frequencies.iter().enumerate() {
+            if *frequency != 0 {
                 heap.push(HuffNode {
-                    weight: frequency,
+                    weight: *frequency,
                     byte: Some(i as u8),
                     left: None,
                     right: None,
@@ -146,7 +146,7 @@ mod test {
     fn HuffNode_from_frequencies_test() {
         let bytes = vec![b'A', b'A', b'C', b'D'];
         let frequencies = get_byte_frequencies(&bytes);
-        let node = HuffNode::from_frequencies(frequencies);
+        let node = HuffNode::from_frequencies(&frequencies);
 
         if let Some(node) = node {
             if let Some(left) = node.left {
@@ -168,7 +168,7 @@ mod test {
     fn HuffCode_from_tree() {
         let bytes = vec![b'A', b'A', b'C', b'D'];
         let frequencies = get_byte_frequencies(&bytes);
-        let node = HuffNode::from_frequencies(frequencies);
+        let node = HuffNode::from_frequencies(&frequencies);
 
         let table = HuffCode::from_tree(&node);
 
